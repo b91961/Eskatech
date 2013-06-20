@@ -1,0 +1,39 @@
+/*
+
+	Jamal Moubarak
+	ASD 1306
+	
+*/
+
+html {
+	background-color: white;
+}
+#headerLogo {
+	text-align: center;
+}
+#cta {
+	text-align: center;
+	margin: 1.5em 0em -1em 0em;
+}
+form {
+	margin: 1em;
+}
+.todoTask {
+	margin: 1em;
+}
+tdh {
+	text-align: center;
+}
+ul li{
+	display: block;
+}
+.delClients {
+	background-color: red;
+    -moz-box-shadow: 0em 0em 0.2em red;
+    -webkit-box-shadow: 0em 0em 0.2em red;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+h2 {
+	text-align: center;
+}

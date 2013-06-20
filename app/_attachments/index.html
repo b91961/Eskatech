@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+
+<!-- 
+Jamal Moubarak
+ASD 1306
+-->
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		
+		<title>Eskatech Surveillance Client List</title>
+		
+    	<link rel="stylesheet" type="text/css" href="jquery/jquery.mobile-1.3.1.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script type="text/javascript" src="js/libs/modernizr.custom.min.js"></script>
+		<meta name="description" content="Eskatech Surveillance Client List" />
+    	<meta name="keywords" content="Eskatech, surveillance, network, cameras, dvr, Toledo, Detroit" />
+    	<meta name="HandheldFriendly" content="True">
+    	<meta name="MobileOptimized" content="320"/>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	
+<body>
+	<section data-role="page" id="home">
+		<div data-role="panel" data-position-fixed="false" data-display="overlay" data-theme="a" id="panel">
+	        <ul data-role="listview" data-theme="c" class="nav" data-inset="true">
+	            <li data-icon="minus"><a href="#" data-rel="close">Close menu</a></li>
+            	<li data-theme="a">Navigation</li>
+                <li data-icon="home"><a href="#home">Home</a></li>
+                <li data-icon="plus"><a href="#addItem">Add A New Client</a></li>
+                <li data-icon="star"><a href="#" id="displayData" class="displayData" data-transition="none">View All Clients</a></li>
+                <li data-icon="info"><a href="#info">Info</a></li>
+                <li data-icon="check"><a href="#todo">To-Do</a></li>
+                <li data-theme="a">Browse by Job Status</li>
+                <li><a href="#pendClientList">Pending Jobs</a></li>
+                <li><a href="#potClientList">Potential Jobs</a></li>
+                <li><a href="#compClientList">Completed Jobs</a></li>
+                <li data-theme="a">Admin</li>
+                <li data-icon="gear"><a href = "#settings">Settings</a></li>
+				<div class="delClients" >
+					<button data-role="button" data-icon="delete" data-iconpos="right" data-theme="a" value="Delete All Clients" class="clearStorage">Delete All Clients</button>
+				</div>
+	        </ul>
+		</div>
+		<header data-role="header" data-position="fixed" >
+			<div id="headerLogo"><a href="#home"><img src="img/logo.png" alt="Eskatech Logo"></a></div>
+			<div align="right"><a href="#panel" class="ui-btn-right" data-role="button" data-icon="grid" data-iconpos="notext">Edit</a></div>
+		</header>
+        <a href="#addItem" id="cta"><div><img id="cta" src="img/ctaIndex.png" alt="Customer Service"></div></a>
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" data-divider-theme="a">
+				<li data-role="list-divider" >Browse By Job Status</li>
+				<li data-theme="c"><a href="#pendClientList" id="pendBut" data-transition="none">Pending Jobs</a></li>
+				<li data-theme="c"><a href="#potClientList" id="potBut" data-transition="none">Potential Jobs</a></li>
+				<li data-theme="c"><a href="#compClientList" id="compBut" data-transition="none">Completed Jobs</a></li>
+				<li data-role="list-divider" >Browse By Client</li>
+				<li data-theme="c"><a href="#" id="displayData" class="displayData" data-transition="none">View All Clients</a></li>											
+			</ul>
+		</div>
+		<div data-role="footer" data-position="fixed" data-id="home">
+			<div data-role="navbar">
+		    	<ul>
+		        	<li><a href="#home" data-icon="home" class="ui-btn-active">Home</a></li>
+		            <li><a href="#info" data-icon="info">Info</a></li>
+		            <li><a href="#todo" data-icon="check">To-Do</a></li>
+		        </ul>
+	        </div>
+	    </div>
+	</section>
+	
+	<section data-role="page" id="info" data-add-back-btn="true">
+		<div data-role="panel" data-position-fixed="false" data-display="overlay" data-theme="a" id="panel">
+	        <ul data-role="listview" data-theme="c" class="nav" data-inset="true">
+	            <li data-icon="minus"><a href="#" data-rel="close">Close menu</a></li>
+            	<li data-theme="a">Navigation</li>
+                <li data-icon="home"><a href="#home">Home</a></li>
+                <li data-icon="plus"><a href="#addItem">Add A New Client</a></li>
+                <li data-icon="star"><a href="#" id="displayData" class="displayData" data-transition="none">View All Clients</a></li>
+                <li data-icon="info"><a href="#info">Info</a></li>
+                <li data-icon="check"><a href="#todo">To-Do</a></li>
+                <li data-theme="a">Browse by Job Status</li>
+                <li><a href="#pendClientList">Pending Jobs</a></li>
+                <li><a href="#potClientList">Potential Jobs</a></li>
+                <li><a href="#compClientList">Completed Jobs</a></li>
+                <li data-theme="a">Admin</li>
+                <li data-icon="gear"><a href = "#settings">Settings</a></li>
+				<div class="delClients" >
+					<button data-role="button" data-icon="delete" data-iconpos="right" data-theme="a" value="Delete All Clients" class="clearStorage">Delete All Clients</button>
+				</div>
+	        </ul>
+		</div>
+		<header data-role="header" data-position="fixed" >
+			<div id="headerLogo"><a href="#home"><img src="img/logo.png" alt="Eskatech Logo"></a></div>
+			<div align="right"><a href="#panel" class="ui-btn-right" data-role="button" data-icon="grid" data-iconpos="notext">Edit</a></div>
+		</header>
+        <a href="#addItem" id="cta"><div><img id="cta" src="img/ctaIndex.png" alt="Customer Service"></div></a>
+		<ul data-role="listview" data-inset="false" class="ui-icon-alt">
+		    <li><a href="http://www.eskatech.com">Eskatech.com</a></li>
+		    <li><a href="https://www.facebook.com/night1ife">Facebook</a></li>
+		    <li><a href="https://twitter.com/JamalEskatech"data-ajax="false">Twitter</a></li>
+		    <li><a href="http://b91961.github.io/Moubarak_Jamal_ASD_1306">Git Pages</a></li>
+		    <li><a href="https://github.com/b91961/Moubarak_Jamal_ASD_1306">Git Repo</a></li>
+		</ul>
+	
+		<div data-role="footer" data-position="fixed" data-id="home">
+			<div data-role="navbar">
+		    	<ul>
+		        	<li><a href="#home" data-icon="home" >Home</a></li>
+		            <li><a href="#info" data-icon="info" class="ui-btn-active">Info</a></li>
+		            <li><a href="#todo" data-icon="check">To-Do</a></li>
+		        </ul>
+	        </div>
+	    </div>
+	</section>
+	
+	<section data-role="page" id="todo" data-add-back-btn="true">
+		<div data-role="panel" data-position-fixed="false" data-display="overlay" data-theme="a" id="panel">
+	        <ul data-role="listview" data-theme="c" class="nav" data-inset="true">
+	            <li data-icon="minus"><a href="#" data-rel="close">Close menu</a></li>
+            	<li data-theme="a">Navigation</li>
+                <li data-icon="home"><a href="#home">Home</a></li>
+                <li data-icon="plus"><a href="#addItem">Add A New Client</a></li>
+                <li data-icon="star"><a href="#" id="displayData" class="displayData" data-transition="none">View All Clients</a></li>
+                <li data-icon="info"><a href="#info">Info</a></li>
+                <li data-icon="check"><a href="#todo">To-Do</a></li>
+                <li data-theme="a">Browse by Job Status</li>
+                <li><a href="#pendClientList">Pending Jobs</a></li>
+                <li><a href="#potClientList">Potential Jobs</a></li>
+                <li><a href="#compClientList">Completed Jobs</a></li>
+                <li data-theme="a">Admin</li>
+                <li data-icon="gear"><a href = "#settings">Settings</a></li>
+				<div class="delClients" >
+					<button data-role="button" data-icon="delete" data-iconpos="right" data-theme="a" value="Delete All Clients" class="clearStorage">Delete All Clients</button>
+				</div>
+	        </ul>
+		</div>
+		<header data-role="header" data-position="fixed" >
+			<div id="headerLogo"><a href="#home"><img src="img/logo.png" alt="Eskatech Logo"></a></div>
+			<div align="right"><a href="#panel" class="ui-btn-right" data-role="button" data-icon="grid" data-iconpos="notext">Edit</a></div>
+		</header>
+        <a href="#addItem" id="cta"><div><img id="cta" src="img/ctaIndex.png" alt="Customer Service"></div></a>
+
+		<div class="todoTask" data-role="collapsible" id="tdDropdown" data-theme="a" data-content-theme="d" data-inset="true">
+		    <h2>Create A Task</h2>
+		    
+	        <form action="#" method="post" id="todoForm" />
+				<h3>Complete form and press send.</h3>					
+				<div data-role="fieldcontain">
+					<label for="subject">Subject:</label>
+					<input type="text" data-clear-btn="true" name="subject" id="subject" placeholder="ex. Call client." class="required"/>
+				</div>    
+				<div data-role="fieldcontain">
+					<label for="todoMess">Message:</label>
+					<textarea name="todoMess" id="todoMess" placeholder="Type Message here."></textarea>
+				</div>
+				
+			<input type="submit" value="Submit" id="submitMessButton" data-role="button" data-theme="a" data-inline="true"><input type="reset" value="Reset" id="resetMessButton" data-role="button" data-theme="c" data-inline="true">
+	        </form>
+	        
+		</div>
+		
+		<header><h2>To-Do News Feed</h2></header>
+			
+			<div>
+				<a href="#todo"><button id="tdDisplayData" class="tdDisplayData" data-theme="a" data-role="button" value="View Messages"></button></a>
+			</div>
+			<div>
+				<button data-role="button" data-theme="a" value="Clear All Messages" id="tdClearStorage">Clear All Messages</button>
+			</div>
+						
+	        <div data-role="content" >
+				<div id="messList" >
+					
+				</div>
+			</div>
+			
+
+		<div data-role="footer" data-position="fixed" data-id="home">
+			<div data-role="navbar">
+		    	<ul>
+		        	<li><a href="#home" data-icon="home" >Home</a></li>
+		            <li><a href="#info" data-icon="info">Info</a></li>
+		            <li><a href="#todo" data-icon="check" class="ui-btn-active">To-Do</a></li>
+		        </ul>
+	        </div>
+	    </div>
+	</section>
+	
+	<section data-role="page" id="addItem" data-add-back-btn="true">
+		<div data-role="panel" data-position-fixed="false" data-display="overlay" data-theme="a" id="panel">
+	        <ul data-role="listview" data-theme="c" class="nav" data-inset="true">
+	            <li data-icon="minus"><a href="#" data-rel="close">Close menu</a></li>
+            	<li data-theme="a">Navigation</li>
+                <li data-icon="home"><a href="#home">Home</a></li>
+                <li data-icon="plus"><a href="#addItem">Add A New Client</a></li>
+                <li data-icon="star"><a href="#" id="displayData" class="displayData" data-transition="none">View All Clients</a></li>
+                <li data-icon="info"><a href="#info">Info</a></li>
+                <li data-icon="check"><a href="#todo">To-Do</a></li>
+                <li data-theme="a">Browse by Job Status</li>
+                <li><a href="#pendClientList">Pending Jobs</a></li>
+                <li><a href="#potClientList">Potential Jobs</a></li>
+                <li><a href="#compClientList">Completed Jobs</a></li>
+                <li data-theme="a">Admin</li>
+                <li data-icon="gear"><a href = "#settings">Settings</a></li>
+				<div class="delClients" >
+					<button data-role="button" data-icon="delete" data-iconpos="right" data-theme="a" value="Delete All Clients" class="clearStorage">Delete All Clients</button>
+				</div>
+	        </ul>
+		</div>
+		<header data-role="header" data-position="fixed" >
+			<div id="headerLogo"><a href="#home"><img src="img/logo.png" alt="Eskatech Logo"></a></div>
+			<div align="right"><a href="#panel" class="ui-btn-right" data-role="button" data-icon="grid" data-iconpos="notext">Edit</a></div>
+		</header>
+        <a href="#addItem" id="cta"><div><img id="cta" src="img/ctaIndex.png" alt="Customer Service"></div></a>
+        <p>*Fields are Required</p>
+						
+		<form action="#" method="post" id="clientInstallForm" />					
+			<div data-role="fieldset">
+							
+			<div data-role="fieldcontain">
+				<label for="group" class="select">*Type of System:</label>
+				<select name="group" id="group" data-native-menu="false" class="required">
+					<option>--Type of System--</option>
+					<option value="surveillance">Surveillance</option>
+					<option value="audioVideo">AudioVideo</option>
+					<option value="network">Network</option>
+					<option value="pos">POS</option>
+				</select>
+			</div>
+					
+			<div data-role="fieldcontain">
+				<label for="compName">*Company Name:</label>
+				<input type="text" data-clear-btn="true" name="compName" id="compName" placeholder="Eskatech" class="required"/>
+			</div>
+								
+			<div data-role="fieldcontain">
+				<label for="contName">*Contact Name:</label>
+				<input type="text" data-clear-btn="true" name="contName" id="contName" placeholder="John Smith" class="required"/>
+			</div>
+			
+			<div data-role="fieldcontain">
+				<label for="contPhone">*Contact Phone #:</label>
+				<input type="tel" data-clear-btn="true" name="contPhone" id="contPhone" placeholder="xxx-xxx-xxxx" class="required phoneUS"/>
+			</div>
+			
+			<div data-role="fieldcontain">
+				<label for="contEmail">*Contact Email:</label>
+				<input type="email" data-clear-btn="true" name="contEmail" id="contEmail" placeholder="example@gmail.com" class="required email"/>
+			</div>
+			
+    		<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup">
+					<legend>Job Status:</legend>
+					<input type="radio" data-theme="c" checked value="Potential" name="status" id="potent" class="Status" />
+				    <label for="potent">Potential</label>
+				    <input type="radio" data-theme="c" value="Pending" name="status" id="pend" class="Status" />
+				    <label for="pend">Pending</label>
+				    <input type="radio" data-theme="c" value="Completed" name="status" id="compl" class="Status" />
+				    <label for="compl">Completed</label>
+		    	</fieldset>
+		    	<ol id="effect" class="formset">
+			    	<h2>What Date was this Job Completed?</h2>
+					<div data-role="fieldcontain">
+						<label for="date">Date:</label>
+						<input type="date" data-clear-btn="true" name="date" id="date" placeholder="mm/dd/yyyy" />
+					</div>
+
+		    		<div data-role="fieldcontain">
+					    <fieldset data-role="controlgroup">
+					        <legend>Was Full Payment Received?</legend>
+							<input type="radio" data-theme="c" value="Yes" name="payment" id="yes" class="paymentStat" />
+						    <label for="yes">Yes</label>
+						    <input type="radio" data-theme="c" value="No" name="payment" id="no" class="paymentStat" />
+						    <label for="no">No</label>
+						    <input type="radio" data-theme="c" value="Partial" name="payment" id="part" class="paymentStat" />
+						    <label for="part">Partial</label>
+					    </fieldset>
+		    		</div>
+		    	</ol>
+    		</div>
+    		
+			<div data-role="fieldcontain">
+				<label for="networkNotes">Network and Login Info:</label>
+				<textarea name="networkNotes" id="networkNotes" placeholder="IP Info, DVR Info, Router Info, etc."></textarea>
+			</div>
+			
+			<div data-role="fieldcontain">
+				<label for="notes">Additional Information:</label>
+				<textarea name="notes" id="notes" placeholder="Type additional information here."></textarea>
+			</div>
+			
+			<input type="submit" value="Submit" id="submitButton" data-role="button" data-theme="a" data-inline="true"><input type="reset" value="Reset" id="resetButton" data-role="button" data-theme="c" data-inline="true">
+			</div>
+			
+		</form>
+
+		<div data-role="footer" data-position="fixed" data-id="home">
+			<div data-role="navbar">
+		    	<ul>
+		        	<li><a href="#home" data-icon="home" >Home</a></li>
+		            <li><a href="#info" data-icon="info">Info</a></li>
+		            <li><a href="#todo" data-icon="check">To-Do</a></li>
+		        </ul>
+	        </div>
+	    </div>
+	</section>
+	
+	<section data-role="page" id="clientList" data-add-back-btn="true">
+		<div data-role="panel" data-position-fixed="false" data-display="overlay" data-theme="a" id="panel">
+	        <ul data-role="listview" data-theme="c" class="nav" data-inset="true">
+	            <li data-icon="minus"><a href="#" data-rel="close">Close menu</a></li>
+            	<li data-theme="a">Navigation</li>
+                <li data-icon="home"><a href="#home">Home</a></li>
+                <li data-icon="plus"><a href="#addItem">Add A New Client</a></li>
+                <li data-icon="star"><a href="#" id="displayData" class="displayData" data-transition="none">View All Clients</a></li>
+                <li data-icon="info"><a href="#info">Info</a></li>
+                <li data-icon="check"><a href="#todo">To-Do</a></li>
+                <li data-theme="a">Browse by Job Status</li>
+                <li><a href="#pendClientList">Pending Jobs</a></li>
+                <li><a href="#potClientList">Potential Jobs</a></li>
+                <li><a href="#compClientList">Completed Jobs</a></li>
+                <li data-theme="a">Admin</li>
+                <li data-icon="gear"><a href = "#settings">Settings</a></li>
+				<div class="delClients" >
+					<button data-role="button" data-icon="delete" data-iconpos="right" data-theme="a" value="Delete All Clients" class="clearStorage">Delete All Clients</button>
+				</div>
+	        </ul>
+		</div>
+		<header data-role="header" data-position="fixed" >
+			<div id="headerLogo"><a href="#home"><img src="img/logo.png" alt="Eskatech Logo"></a></div>
+			<div align="right"><a href="#panel" class="ui-btn-right" data-role="button" data-icon="grid" data-iconpos="notext">Edit</a></div>
+		</header>
+        <a href="#addItem" id="cta"><div><img id="cta" src="img/ctaIndex.png" alt="Customer Service"></div></a>
+
+    	<section data-role="content">
+			<header><h2>Client List</h2></header>
+
+			<div data-role="content" >
+				<div id="clList" >
+					
+				</div>
+			</div>
+    	</section>
+	
+		<div data-role="footer" data-position="fixed" data-id="home">
+			<div data-role="navbar">
+		    	<ul>
+		        	<li><a href="#home" data-icon="home" >Home</a></li>
+		            <li><a href="#info" data-icon="info" class="ui-btn-active">Info</a></li>
+		            <li><a href="#todo" data-icon="check">To-Do</a></li>
+		        </ul>
+	        </div>
+	    </div>
+	</section>
+	
+	<section data-role="page" id="pendClientList" data-add-back-btn="true">
+		<div data-role="panel" data-position-fixed="false" data-display="overlay" data-theme="a" id="panel">
+	        <ul data-role="listview" data-theme="c" class="nav" data-inset="true">
+	            <li data-icon="minus"><a href="#" data-rel="close">Close menu</a></li>
+            	<li data-theme="a">Navigation</li>
+                <li data-icon="home"><a href="#home">Home</a></li>
+                <li data-icon="plus"><a href="#addItem">Add A New Client</a></li>
+                <li data-icon="star"><a href="#" id="displayData" class="displayData" data-transition="none">View All Clients</a></li>
+                <li data-icon="info"><a href="#info">Info</a></li>
+                <li data-icon="check"><a href="#todo">To-Do</a></li>
+                <li data-theme="a">Browse by Job Status</li>
+                <li><a href="#pendClientList">Pending Jobs</a></li>
+                <li><a href="#potClientList">Potential Jobs</a></li>
+                <li><a href="#compClientList">Completed Jobs</a></li>
+                <li data-theme="a">Admin</li>
+                <li data-icon="gear"><a href = "#settings">Settings</a></li>
+				<div class="delClients" >
+					<button data-role="button" data-icon="delete" data-iconpos="right" data-theme="a" value="Delete All Clients" class="clearStorage">Delete All Clients</button>
+				</div>
+	        </ul>
+		</div>
+		<header data-role="header" data-position="fixed" >
+			<div id="headerLogo"><a href="#home"><img src="img/logo.png" alt="Eskatech Logo"></a></div>
+			<div align="right"><a href="#panel" class="ui-btn-right" data-role="button" data-icon="grid" data-iconpos="notext">Edit</a></div>
+		</header>
+        <a href="#addItem" id="cta"><div><img id="cta" src="img/ctaIndex.png" alt="Customer Service"></div></a>
+
+    	<section data-role="content">
+			<header><h2>Pending Client List</h2></header>
+				<div id="pendClList" >
+					
+				</div>
+    	</section>
+	
+		<div data-role="footer" data-position="fixed" data-id="home">
+			<div data-role="navbar">
+		    	<ul>
+		        	<li><a href="#home" data-icon="home" >Home</a></li>
+		            <li><a href="#info" data-icon="info" class="ui-btn-active">Info</a></li>
+		            <li><a href="#todo" data-icon="check">To-Do</a></li>
+		        </ul>
+	        </div>
+	    </div>
+	</section>
+	
+	<section data-role="page" id="potClientList" data-add-back-btn="true">
+		<div data-role="panel" data-position-fixed="false" data-display="overlay" data-theme="a" id="panel">
+	        <ul data-role="listview" data-theme="c" class="nav" data-inset="true">
+	            <li data-icon="minus"><a href="#" data-rel="close">Close menu</a></li>
+            	<li data-theme="a">Navigation</li>
+                <li data-icon="home"><a href="#home">Home</a></li>
+                <li data-icon="plus"><a href="#addItem">Add A New Client</a></li>
+                <li data-icon="star"><a href="#" id="displayData" class="displayData" data-transition="none">View All Clients</a></li>
+                <li data-icon="info"><a href="#info">Info</a></li>
+                <li data-icon="check"><a href="#todo">To-Do</a></li>
+                <li data-theme="a">Browse by Job Status</li>
+                <li><a href="#pendClientList">Pending Jobs</a></li>
+                <li><a href="#potClientList">Potential Jobs</a></li>
+                <li><a href="#compClientList">Completed Jobs</a></li>
+                <li data-theme="a">Admin</li>
+                <li data-icon="gear"><a href = "#settings">Settings</a></li>
+				<div class="delClients" >
+					<button data-role="button" data-icon="delete" data-iconpos="right" data-theme="a" value="Delete All Clients" class="clearStorage">Delete All Clients</button>
+				</div>
+	        </ul>
+		</div>
+		<header data-role="header" data-position="fixed" >
+			<div id="headerLogo"><a href="#home"><img src="img/logo.png" alt="Eskatech Logo"></a></div>
+			<div align="right"><a href="#panel" class="ui-btn-right" data-role="button" data-icon="grid" data-iconpos="notext">Edit</a></div>
+		</header>
+        <a href="#addItem" id="cta"><div><img id="cta" src="img/ctaIndex.png" alt="Customer Service"></div></a>
+
+    	<section data-role="content">
+			<header><h2> Potential Client List</h2></header>
+
+			<div data-role="content" >
+				<div id="potClList" >
+					
+				</div>
+			</div>
+    	</section>
+	
+		<div data-role="footer" data-position="fixed" data-id="home">
+			<div data-role="navbar">
+		    	<ul>
+		        	<li><a href="#home" data-icon="home" >Home</a></li>
+		            <li><a href="#info" data-icon="info" class="ui-btn-active">Info</a></li>
+		            <li><a href="#todo" data-icon="check">To-Do</a></li>
+		        </ul>
+	        </div>
+	    </div>
+	</section>
+	
+	<section data-role="page" id="compClientList" data-add-back-btn="true">
+		<div data-role="panel" data-position-fixed="false" data-display="overlay" data-theme="a" id="panel">
+	        <ul data-role="listview" data-theme="c" class="nav" data-inset="true">
+	            <li data-icon="minus"><a href="#" data-rel="close">Close menu</a></li>
+            	<li data-theme="a">Navigation</li>
+                <li data-icon="home"><a href="#home">Home</a></li>
+                <li data-icon="plus"><a href="#addItem">Add A New Client</a></li>
+                <li data-icon="star"><a href="#" id="displayData" class="displayData" data-transition="none">View All Clients</a></li>
+                <li data-icon="info"><a href="#info">Info</a></li>
+                <li data-icon="check"><a href="#todo">To-Do</a></li>
+                <li data-theme="a">Browse by Job Status</li>
+                <li><a href="#pendClientList">Pending Jobs</a></li>
+                <li><a href="#potClientList">Potential Jobs</a></li>
+                <li><a href="#compClientList">Completed Jobs</a></li>
+                <li data-theme="a">Admin</li>
+                <li data-icon="gear"><a href = "#settings">Settings</a></li>
+				<div class="delClients" >
+					<button data-role="button" data-icon="delete" data-iconpos="right" data-theme="a" value="Delete All Clients" class="clearStorage">Delete All Clients</button>
+				</div>
+	        </ul>
+		</div>
+		<header data-role="header" data-position="fixed" >
+			<div id="headerLogo"><a href="#home"><img src="img/logo.png" alt="Eskatech Logo"></a></div>
+			<div align="right"><a href="#panel" class="ui-btn-right" data-role="button" data-icon="grid" data-iconpos="notext">Edit</a></div>
+		</header>
+        <a href="#addItem" id="cta"><div><img id="cta" src="img/ctaIndex.png" alt="Customer Service"></div></a>
+
+    	<section data-role="content">
+			<header><h2>Completed Client List</h2></header>
+
+			<div data-role="content" >
+				<div id="compClList" >
+					
+				</div>
+			</div>
+    	</section>
+	
+		<div data-role="footer" data-position="fixed" data-id="home">
+			<div data-role="navbar">
+		    	<ul>
+		        	<li><a href="#home" data-icon="home" >Home</a></li>
+		            <li><a href="#info" data-icon="info" class="ui-btn-active">Info</a></li>
+		            <li><a href="#todo" data-icon="check">To-Do</a></li>
+		        </ul>
+	        </div>
+	    </div>
+	</section>
+	
+	<section data-role="page" id="settings" data-add-back-btn="true">
+		<div data-role="panel" data-position-fixed="false" data-display="overlay" data-theme="a" id="panel">
+	        <ul data-role="listview" data-theme="c" class="nav" data-inset="true">
+	            <li data-icon="minus"><a href="#" data-rel="close">Close menu</a></li>
+            	<li data-theme="a">Navigation</li>
+                <li data-icon="home"><a href="#home">Home</a></li>
+                <li data-icon="plus"><a href="#addItem">Add A New Client</a></li>
+                <li data-icon="star"><a href="#" id="displayData" class="displayData" data-transition="none">View All Clients</a>/li>
+                <li data-icon="info"><a href="#info">Info</a></li>
+                <li data-icon="check"><a href="#todo">To-Do</a></li>
+                <li data-theme="a">Browse by Job Status</li>
+                <li><a href="#pendClientList">Pending Jobs</a></li>
+                <li><a href="#potClientList">Potential Jobs</a></li>
+                <li><a href="#compClientList">Completed Jobs</a></li>
+                <li data-theme="a">Admin</li>
+                <li data-icon="gear"><a href = "#settings">Settings</a></li>
+				<div class="delClients" >
+					<button data-role="button" data-icon="delete" data-iconpos="right" data-theme="a" value="Delete All Clients" class="clearStorage">Delete All Clients</button>
+				</div>
+	        </ul>
+		</div>
+		<header data-role="header" data-position="fixed" >
+			<div id="headerLogo"><a href="#home"><img src="img/logo.png" alt="Eskatech Logo"></a></div>
+			<div align="right"><a href="#panel" class="ui-btn-right" data-role="button" data-icon="grid" data-iconpos="notext">Edit</a></div>
+		</header>
+        <a href="#addItem" id="cta"><div><img id="cta" src="img/ctaIndex.png" alt="Customer Service"></div></a>
+
+    	<section data-role="content">
+			<header><h2>Settings</h2></header>
+
+			<div class="delClients" >
+				<button data-role="button" data-icon="delete" data-iconpos="right" data-theme="a" value="Delete All Clients" class="clearStorage">Delete All Clients</button>
+			</div>
+    	</section>
+	
+		<div data-role="footer" data-position="fixed" data-id="home">
+			<div data-role="navbar">
+		    	<ul>
+		        	<li><a href="#home" data-icon="home" >Home</a></li>
+		            <li><a href="#info" data-icon="info" class="ui-btn-active">Info</a></li>
+		            <li><a href="#todo" data-icon="check">To-Do</a></li>
+		        </ul>
+	        </div>
+	    </div>
+	</section>
+	
+	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="jquery/jquery.mobile-1.3.1.min.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.validate.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.form.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/json.js"></script>
+</body>
+	
+</html>
