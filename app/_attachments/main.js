@@ -2,7 +2,7 @@
 // ASD 1306
 
 //DOM Ready function.
-$(document).ready(function(){
+$(document).on('pageinit', '#home', function(){
 	
 	// Home Page pageinit function.
 	$('#home').on('pageinit', function() {
