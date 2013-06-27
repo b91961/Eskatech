@@ -1,8 +1,6 @@
 // Jamal Moubarak
 // ASD 1306
 
-//DOM Ready function.
-$(document).on('pageinit', '#home', function(){
 	
 	// Home Page pageinit function.
 	$('#home').on('pageinit', function() {
@@ -440,7 +438,6 @@ $(document).on('pageinit', '#home', function(){
 	$('.tdDisplayData').on('click', tdShowData);
 
 
-});
 
 
 

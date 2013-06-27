@@ -1,6 +1,6 @@
 function (doc) {
-	if (doc._id.substring(0, 6) === "client") {
-		emit(doc._id.substr(6), {
+	if (doc._id.substring(0, 10) === "clientdata") {
+		emit(doc._id.substr(10), {
 			"id": doc.id,
 			"rev": doc._rev,
 			"group": doc.group,

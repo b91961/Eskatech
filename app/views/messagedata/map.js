@@ -1,6 +1,6 @@
 function (doc) {
-	if (doc._id.substring(0, 7) === "message") {
-		emit(doc._id.substr(7), {
+	if (doc._id.substring(0, 11) === "messagedata") {
+		emit(doc._id.substr(11), {
 			"id": doc._id,
 			"rev": doc._rev,
 			
