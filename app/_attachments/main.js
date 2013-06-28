@@ -92,7 +92,7 @@
 			$.couch.db("eskatech").saveDoc(messagedata, {
 				success: function (data) {
 					alert('To-Do Message has been sent!');
-				},
+				}
 			});
 			window.location = '#todo';
 			window.location.reload('#');
@@ -102,8 +102,8 @@
 		
 		$.couch.db("eskatech").view("eskatechclients/messagedata", {
 			success: function (data) {
-				if (data.rows.length == 0) {
-					autoFillData();
+				if (data.rows.length === 0) {
+					tdAutoFillData();
 						alert('No Messages have been entered yet.  Here is some sample data.');
 				};
 				$.each(data.rows, function (index, message) {
@@ -140,7 +140,7 @@
 						if(tdAsk){
 							$.couch.db("eskatech").removeDoc(tdEditKey, {
 								success: function (data) {
-									tdEditKey = null
+									tdEditKey = null;
 									alert('Message has been removed!');
 									window.location = '#home';
 									window.location.reload('#');
