@@ -89,7 +89,7 @@
 		}
 			tdItem.subject      = $('#subject').val();
 			tdItem.todoMess 	= $('#todoMess').val();
-			$.couch.db("eskatech").saveDoc(qa, {
+			$.couch.db("eskatech").saveDoc(messagedata, {
 				success: function (data) {
 					alert('To-Do Message has been sent!');
 				},
