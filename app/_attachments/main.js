@@ -73,33 +73,90 @@
 
 // All functions go below here.
 
-	var tdEditKey = '';
+// For messages form.
+
+	var tdEditKey = null;
+	var tdItem    = {};
 
 	var storeData = function(){
 		var tdId;
-		if(!tdEditKey) {
-			tdId = Math.floor(Math.random()*100000001);
+		if(tdEditKey === null) {
+			var tdId   = Math.floor(Math.random()*100000001);
+			tdItem._id = "messagedata:" + id;
 		} else {
-			tdId = tdEditKey;
+			tdItem._id  = tdEditKey._id;
+			tdItem._rev = tdEditKey._rev;
 		}
-		
-		var tdItem          = {};
-			tdItem.subject  = ['Subject:', $('#subject').val()];
-			tdItem.todoMess 	= ['Message:', $('#todoMess').val()];
-			localStorage.setItem(tdId, JSON.stringify(tdItem)).appendTo('#todo');
-			alert('To-Do Message has been sent!');
-			console.log(tdId);
+			tdItem.subject      = $('#subject').val();
+			tdItem.todoMess 	= $('#todoMess').val();
+			$.couch.db("eskatech").saveDoc(qa, {
+				success: function (data) {
+					alert('To-Do Message has been sent!');
+				},
+			});
 			window.location = '#todo';
 			window.location.reload('#');
 			return false;
 	};
+	$(document).on('pageinit', '#todo', function () {
+		
+		$.couch.db("eskatech").view("eskatechclients/messagedata", {
+			success: function (data) {
+				if (data.rows.length == 0) {
+					autoFillData();
+						alert('No Messages have been entered yet.  Here is some sample data.');
+				};
+				$.each(data.rows, function (index, message) {
+					var tdId = message.value.id;
+					var rev  = message.value.rev;
+						var tdMakeSubList = $('<div></div>');
+						var tdCreateLi = $(
+							'<ul>'+
+								'<li>' + message.value.subject + '</li>' +
+								'<li>' + message.value.todoMess + '</li>' +
+							'</ul>'				
+						);
+					var tdEditClientButton = $("<button><a href='#todo' id='tdEditClientButton" +index+ "'> Edit Message</a></button>");
+					tdEditClientButton.on('click', function() {
+						$.couch.db("eskatech").openDoc(tdId, {
+							success: function (data) {
+								tdEditKey = {
+									_id: id,
+									_rev: rev
+								};
+								$("#subject").val(message.value.subject);
+								$("#todoMess").val(message.value.subject);
+								$("#submitMessButton").prev(".ui-btn-inner").children(".ui-btn-txt").html("Update Message");
+							}
+						});
+					});
+					var tdDeleteClientButton = $("<button><a href='#' id='delete"+index+"'> Message Seen</a></button>");
+					tdDeleteClientButton.on('click', function(){
+						tdEditKey = {
+							_id: id,
+							_rev: rev
+						};
+						var tdAsk = confirm('Are you sure you read this message? Message will be deleted!');
+						if(tdAsk){
+							$.couch.db("eskatech").removeDoc(tdEditKey, {
+								success: function (data) {
+									tdEditKey = null
+									alert('Message has been removed!');
+									window.location = '#home';
+									window.location.reload('#');
+								}
+							});
+						}
+					});
+					tdMakeSubList.append(tdCreateLi).append(tdDeleteClientButton).append(tdEditClientButton).appendTo('#messList');	
+				});
+			}
+		});	
+	});	
 	
 	var tdAutoFillData = function(){
-		$.ajax({
-			url			:	'_view/messages',
-			type		:	'GET',
-			dataType	:	'json',
-			success		:	function(data) {
+		$.couch.db("eskatech").view("eskatechclients/messages", {
+			success : function(data) {
 				$.each(data.rows, function(index, message){
 					var makeSubList = $('<div></div>');
 					var createLi = $(
@@ -115,60 +172,6 @@
 		});
 	};
 	
-		var tdDeleteItem = function(tdEditKey) {
-		var tdAsk = confirm('Are you sure you read this message? Message will be deleted!');
-		if(tdAsk){
-			localStorage.removeItem(tdEditKey);
-			alert('Message has been removed!');
-			window.location = '#home';
-			window.location.reload('#');
-		}else{
-			alert('Message was not Deleted!');
-		}	
-	};
-	
-	var tdEditItem = function(tdEditKey) {
-		var tdItems = JSON.parse(localStorage.getItem(tdEditKey));
-			$('#subject').val(tdItems.subject[1]);
-			$('#todoMess').val(tdItems.todoMess[1]);
-			$('#submitMessButton').prev('.ui-btn-inner').children('.ui-btn-text').html('Update Message');
-			$('#submitMessButton').val('Update Message').data('key', tdEditKey);	
-	};
-	
-	var tdShowData = function(key){
-		if(localStorage.length === 0){
-			tdAutoFillData();
-			alert('No Messages have been entered yet.  Here is some sample data.');
-		}
-		$.mobile.changePage('#');
-		
-		for (var j=0, l=localStorage.length; j<l; j++) {
-			var key = localStorage.key(j);
-			var tdValue = localStorage.getItem(key);
-			var tdClData = JSON.parse(tdValue);
-			var tdMakeSubList = $('<div></div>');
-			var tdCreateLi = $(
-				'<p>' + tdClData.subject[0] + ' ' + tdClData.subject[1] + '</p>' +
-				'<p>' + tdClData.todoMess[0] + ' ' + tdClData.todoMess[1] + '</p>'				
-			);
-			var tdEditClientButton = $("<button data-key='"+key+"'><a href='#todo' id='tdEditClientButton'> Edit Message</a></button>");
-				tdEditClientButton.on('click', function(){
-					tdEditKey = $(this).data('key');
-					tdEditItem(tdEditKey);
-				});
-			var tdDeleteClientButton = $("<button data-key='"+key+"'><a href='#todoForm' id='delete"+key+"'> Message Seen</a></button>");
-				tdDeleteClientButton.on('click', function(){
-					tdEditKey = $(this).data('key');
-					tdDeleteItem(tdEditKey);
-				});
-		tdMakeSubList.append(tdCreateLi).append(tdDeleteClientButton).append(tdEditClientButton).appendTo('#messList');
-		}
-	};
-	
-	//$('#tdEditClientButton').click(function(){
-	//	$('#tdDropdown').trigger('click');
-	//});
-	
 	var tdClearStorage = function(){
 		if(localStorage.length === 0){
 			alert('You have no Messages to Clear.');
@@ -183,6 +186,8 @@
 			}
 		}
 	};
+	
+	// Client form code goes here.
 
 
 	var editKey = '';
@@ -434,8 +439,9 @@
 	$('.displayData').on('click', showData);
 	
 	$('.tdClearStorage').on('click', tdClearStorage);
-	$('#submitMessButton').on('click', storeData);
-	$('.tdDisplayData').on('click', tdShowData);
+	$('#submitMessButton').on('click', function() {
+		storeData(tdEditKey);
+	});
 
 
 
