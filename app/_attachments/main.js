@@ -82,10 +82,14 @@
 		if(tdEditKey === null) {
 			var tdId   = Math.floor(Math.random()*100000001);
 			tdItem._id = "messagedata:" + tdId;
+			console.log("no key");
 		} else {
 			tdItem._id  = tdEditKey._id;
 			tdItem._rev = tdEditKey._rev;
+			console.log("new key created");
 		}
+			console.log(tdItem._id);
+			console.log(tdItem._rev);
 			tdItem.subject      = $('#subject').val();
 			tdItem.todoMess 	= $('#todoMess').val();
 			$.couch.db("clients").saveDoc(tdItem, {
@@ -101,6 +105,7 @@
 		
 		$.couch.db("clients").view("eskatechclients/messagedata", {
 			success: function (data) {
+			console.log(data.rows);
 				if (data.rows.length == 0) {
 					tdAutoFillData();
 						alert('No Messages have been entered yet.  Here is some sample data.');
@@ -123,9 +128,11 @@
 									_id: id,
 									_rev: rev
 								};
+								console.log(tdEditKey);
 								$("#subject").val(message.value.subject);
 								$("#todoMess").val(message.value.subject);
 								$("#submitMessButton").prev(".ui-btn-inner").children(".ui-btn-txt").html("Update Message");
+								console.log(tdEditKey);
 							}
 						});
 					});
