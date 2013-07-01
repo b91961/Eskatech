@@ -100,7 +100,7 @@
 	};
 	$(document).on('pageinit', '#todo', function () {
 		
-		$.couch.db("eskatech").view("eskatechclients/messagedata", {
+		$.couch.db("clients").view("eskatechclients/messagedata", {
 			success: function (data) {
 				if (data.rows.length === 0) {
 					tdAutoFillData();
@@ -118,7 +118,7 @@
 						);
 					var tdEditClientButton = $("<button><a href='#todo' id='tdEditClientButton" +index+ "'> Edit Message</a></button>");
 					tdEditClientButton.on('click', function() {
-						$.couch.db("eskatech").openDoc(tdId, {
+						$.couch.db("clients").openDoc(tdId, {
 							success: function (data) {
 								tdEditKey = {
 									_id: id,
@@ -138,7 +138,7 @@
 						};
 						var tdAsk = confirm('Are you sure you read this message? Message will be deleted!');
 						if(tdAsk){
-							$.couch.db("eskatech").removeDoc(tdEditKey, {
+							$.couch.db("clients").removeDoc(tdEditKey, {
 								success: function (data) {
 									tdEditKey = null;
 									alert('Message has been removed!');
@@ -155,7 +155,7 @@
 	});	
 	
 	var tdAutoFillData = function(){
-		$.couch.db("eskatech").view("eskatechclients/messages", {
+		$.couch.db("clients").view("eskatechclients/messages", {
 			success : function(data) {
 				$.each(data.rows, function(index, message){
 					var makeSubList = $('<div></div>');
