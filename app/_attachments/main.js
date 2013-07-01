@@ -79,17 +79,16 @@
 	var tdItem    = {};
 
 	var storeData = function(){
-		var tdId;
 		if(tdEditKey === null) {
 			var tdId   = Math.floor(Math.random()*100000001);
-			tdItem._id = "messagedata:" + id;
+			tdItem._id = "messagedata:" + tdId;
 		} else {
 			tdItem._id  = tdEditKey._id;
 			tdItem._rev = tdEditKey._rev;
 		}
 			tdItem.subject      = $('#subject').val();
 			tdItem.todoMess 	= $('#todoMess').val();
-			$.couch.db("eskatech").saveDoc(messagedata, {
+			$.couch.db("clients").saveDoc(tdItem, {
 				success: function (data) {
 					alert('To-Do Message has been sent!');
 				}
@@ -102,7 +101,7 @@
 		
 		$.couch.db("clients").view("eskatechclients/messagedata", {
 			success: function (data) {
-				if (data.rows.length === 0) {
+				if (data.rows.length == 0) {
 					tdAutoFillData();
 						alert('No Messages have been entered yet.  Here is some sample data.');
 				};
@@ -112,8 +111,8 @@
 						var tdMakeSubList = $('<div></div>');
 						var tdCreateLi = $(
 							'<ul>'+
-								'<li>' + message.value.subject + '</li>' +
-								'<li>' + message.value.todoMess + '</li>' +
+								'<li>' + "Subject: " + message.value.subject + '</li>' +
+								'<li>' + "Message: " + message.value.todoMess + '</li>' +
 							'</ul>'				
 						);
 					var tdEditClientButton = $("<button><a href='#todo' id='tdEditClientButton" +index+ "'> Edit Message</a></button>");
@@ -142,7 +141,6 @@
 								success: function (data) {
 									tdEditKey = null;
 									alert('Message has been removed!');
-									window.location = '#home';
 									window.location.reload('#');
 								}
 							});
